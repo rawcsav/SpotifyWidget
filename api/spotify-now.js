@@ -5,7 +5,8 @@ const SpotifyWebApi = require('spotify-web-api-node');
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    redirectUri: 'https://rawcsav.com/callback'
+    redirectUri: 'https://rawcsav.com/callback',
+      refreshToken: process.env.REFRESH_TOKEN, // Add this line
 });
 
 module.exports = async (req, res) => {
@@ -15,7 +16,6 @@ module.exports = async (req, res) => {
             const data = await spotifyApi.authorizationCodeGrant(req.query.code);
             const { access_token, refresh_token, expires_in } = data.body;
             spotifyApi.setAccessToken(access_token);
-            spotifyApi.setRefreshToken(refresh_token);
 
             // Optionally, refresh the token automatically when it expires
             setTimeout(refreshAccessToken, expires_in * 1000 - 60000, spotifyApi);
