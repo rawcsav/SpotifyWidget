@@ -55,6 +55,14 @@ async function getTrackInfo() {
 
 module.exports = async (req, res) => {
   try {
+    // Check the Origin header of the request
+    const origin = req.headers.origin;
+
+    // Allow CORS requests only from localhost and rawcsav.com
+    if (origin && (origin.includes('localhost') || origin.includes('rawcsav.com'))) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+
     const trackInfo = await getTrackInfo();
     res.json(trackInfo);
   } catch (error) {
