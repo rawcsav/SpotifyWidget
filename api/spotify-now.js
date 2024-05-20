@@ -24,11 +24,12 @@ async function getTrackInfo() {
         if (currentTrack.body && currentTrack.body.is_playing) {
             const trackInfo = {
                 artist: currentTrack.body.item.artists.map((artist) => artist.name).join(', '),
+                artist_urls: currentTrack.body.item.artists.map((artist) => `https://open.spotify.com/artist/${artist.id}`),
                 track_name: currentTrack.body.item.name,
                 album_cover: currentTrack.body.item.album.images[0].url,
                 song_url: `https://open.spotify.com/track/${currentTrack.body.item.id}`,
                 playing: true,
-                track_id: currentTrack.body.item.id, // Store the track ID
+                track_id: currentTrack.body.item.id,
             };
             return trackInfo;
         } else {
@@ -38,11 +39,12 @@ async function getTrackInfo() {
                 const lastTrack = recentlyPlayed.body.items[0].track;
                 const trackInfo = {
                     artist: lastTrack.artists.map(artist => artist.name).join(', '),
+                    artist_urls: lastTrack.artists.map((artist) => `https://open.spotify.com/artist/${artist.id}`),
                     track_name: lastTrack.name,
                     album_cover: lastTrack.album.images[0].url,
                     song_url: `https://open.spotify.com/track/${lastTrack.id}`,
                     playing: false,
-                    track_id: lastTrack.id, // Store the track ID
+                    track_id: lastTrack.id,
                 };
                 return trackInfo;
             } else {
