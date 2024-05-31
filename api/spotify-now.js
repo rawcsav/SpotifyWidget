@@ -27,7 +27,7 @@
                      artist: currentTrack.body.item.artists.map((artist) => artist.name).join(', '),
                      artist_urls: currentTrack.body.item.artists.map((artist) => `https://open.spotify.com/artist/${artist.id}`),
                      track_name: currentTrack.body.item.name,
-                     album_cover: currentTrack.body.item.album.images[2].url,
+                     album_cover: currentTrack.body.item.album.images[0].url,
                      song_url: `https://open.spotify.com/track/${currentTrack.body.item.id}`,
                      playing: true,
                      track_id: currentTrack.body.item.id,
@@ -42,7 +42,7 @@
                          artist: lastTrack.artists.map(artist => artist.name).join(', '),
                          artist_urls: lastTrack.artists.map((artist) => `https://open.spotify.com/artist/${artist.id}`),
                          track_name: lastTrack.name,
-                         album_cover: lastTrack.album.images[2].url,
+                         album_cover: lastTrack.album.images[0].url,
                          song_url: `https://open.spotify.com/track/${lastTrack.id}`,
                          playing: false,
                          track_id: lastTrack.id,
@@ -59,30 +59,18 @@
      }
 
      module.exports = async (req, res) => {
-         try {
-             // Check the Origin header of the request
-             const origin = req.headers.origin;
+    try {
+        // Check the Origin header of the request
+        const origin = req.headers.origin;
 
-             // Allow CORS requests only from localhost and rawcsav.com
-             if (origin && (origin.includes('localhost') || origin.includes('rawcsav.com'))) {
-                 res.setHeader('Access-Control-Allow-Origin', origin);
-             }
+        // Allow CORS requests only from localhost and rawcsav.com
+        if (origin && (origin.includes('localhost') || origin.includes('rawcsav.com'))) {
+            res.setHeader('Access-Control-Allow-Origin', origin);
+        }
 
-             const trackInfo = await getTrackInfo();
-
-             // Extract primary color from album cover using Vibrant
-             Vibrant.from(trackInfo.album_cover).getPalette((err, palette) => {
-                 if (err) {
-                     console.error('Error extracting color:', err);
-                     res.json(trackInfo); // Send track info without primary color if extraction fails
-                 } else {
-                     const primaryColor = palette.Vibrant.getRgb();
-                     trackInfo.primary_color = `rgb(${primaryColor[0]}, ${primaryColor[1]}, ${primaryColor[2]})`;
-                     res.json(trackInfo);
-                 }
-             });
-
-         } catch (error) {
-             res.status(500).json({ error: 'Internal Server Error' });
-         }
-     };
+        const trackInfo = await getTrackInfo();
+        res.json(trackInfo);
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+};
