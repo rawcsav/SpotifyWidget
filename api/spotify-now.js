@@ -27,7 +27,7 @@
                      artist: currentTrack.body.item.artists.map((artist) => artist.name).join(', '),
                      artist_urls: currentTrack.body.item.artists.map((artist) => `https://open.spotify.com/artist/${artist.id}`),
                      track_name: currentTrack.body.item.name,
-                     album_cover: currentTrack.body.item.album.images[1].url,
+                     album_cover: currentTrack.body.item.album.images[2].url,
                      song_url: `https://open.spotify.com/track/${currentTrack.body.item.id}`,
                      playing: true,
                      track_id: currentTrack.body.item.id,
