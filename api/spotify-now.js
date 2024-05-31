@@ -42,7 +42,7 @@
                          artist: lastTrack.artists.map(artist => artist.name).join(', '),
                          artist_urls: lastTrack.artists.map((artist) => `https://open.spotify.com/artist/${artist.id}`),
                          track_name: lastTrack.name,
-                         album_cover: lastTrack.album.images[1].url,
+                         album_cover: lastTrack.album.images[2].url,
                          song_url: `https://open.spotify.com/track/${lastTrack.id}`,
                          playing: false,
                          track_id: lastTrack.id,
