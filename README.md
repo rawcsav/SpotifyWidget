@@ -17,4 +17,5 @@ Script to setup API for my personal website that can be accessed to retrieve cur
 }
 
 ### CORS Policy
-By default, the script allows CORS requests from `localhost` and my site `rawcsav.com`. Modify the script as needed to allow different origins.
+By default, the script allows CORS requests from `localhost` and my site `rawcsav.com`.
+Modify the script as needed to allow different origins.
