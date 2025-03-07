@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "axios": "^1.6.7",
+    "axios": "^1.8.2",
     "dotenv": "^16.4.5",
     "spotify-web-api-node": "^5.0.2"
   },
@@ -20,6 +20,6 @@
   "license": "CC-BY-SA-4.0",
   "description": "Spotify widget for personal website",
   "devDependencies": {
-    "node-vibrant": "^3.2.1-alpha.1"
+    "node-vibrant": "^4.0.3"
   }
 }
